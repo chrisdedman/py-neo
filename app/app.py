@@ -2,7 +2,7 @@
 from flask import Flask, request, render_template
 from datetime import datetime, timedelta
 from api import get_api_data, get_neo_info
-from config import BASE_URL, API_KEY
+from config import BASE_URL, API_KEY, port
 
 app = Flask(__name__)
 
@@ -35,4 +35,5 @@ def neo_data():
         return "NEO Data Not Found!"
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080, debug=True)
+    app.config.from_pyfile('settings.py')
+    app.run(host="0.0.0.0", port=port, debug=True)
