@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NEO Data</title>
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+</head>
+<body>
+    <h1>Near Earth Object Data</h1>
+
+    <form method="post" action="/">
+        <div class="date-inputs">
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" value="{{ start_date }}" required>
+            
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date" value="{{ end_date }}" required>
+        </div>
+        
+        <input type="submit" value="Submit">
+    </form>
+    
+    <p><br>Number of Asteroids Detected: {{ num_of_object }}</p>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>First Observation</th>
+                <th>Last Observation</th>
+                <th>Is Hazardous?</th>
+                <th>Close Approach</th>
+                <th>Current Orbiting</th>
+                <th>Estimated Diameter</th>
+                <th>All Orbiting Bodies</th>
+                <th>Relative Velocity</th>
+                <!-- <th>Orbit Class Type</th> -->
+                <th>Orbit Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for asteroid in neo_info.values() %}
+            <tr>
+                <td>{{ asteroid['id'] }}</td>
+                <td>{{ asteroid['name'] }}</td>
+                <td>{{ asteroid['first_observation'] }}</td>
+                <td>{{ asteroid['last_observation'] }}</td>
+                <td>{{ asteroid['hazardous'] }}</td>
+                <td>{{ asteroid['close_approach_date'] }}</td>
+                <td>{{ asteroid['current_orbiting_body'] }}</td>
+                <td>
+                    {{ asteroid['diameter_meter']['estimated_diameter_min'] | int }}m - {{ asteroid['diameter_meter']['estimated_diameter_max'] | int }}m
+                    <br>
+                    {{ asteroid['diameter_feet']['estimated_diameter_min'] | int }}ft - {{ asteroid['diameter_feet']['estimated_diameter_max'] | int }}ft
+                </td>
+                <td>{{ asteroid['orbiting_bodies'] }}</td>
+                <td>
+                    {{ asteroid['velocity_km'] | float | round(2) }} km/h
+                    <br>
+                    {{ asteroid['velocity_miles'] | float | round(2) }} miles/h
+                </td>
+                <!-- <td>{{ asteroid['orbit_class_type'] }}</td> -->
+                <td>{{ asteroid['orbit_type_description'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
