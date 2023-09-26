@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>NEO Data</title>
+    <title>Near Earth Asteroids</title>
     <link rel="stylesheet" type="text/css" href="../static/style.css">
 </head>
 <body>
     <h1>Near Earth Object Data</h1>
+    <hr>
+    <p>
+        Please specify the date range for which you would like to retrieve Near-Earth Object informations:
+    </p>>
 
     <form method="post" action="/">
         <div class="date-inputs">
@@ -18,8 +22,10 @@
         
         <input type="submit" value="Submit">
     </form>
+
+    <hr>
     
-    <p><br>Number of Asteroids Detected: {{ num_of_object }}</p>
+    <p>Number of Asteroids Detected: {{ num_of_object }}</p>
     
     <table border="1">
         <thead>
@@ -34,7 +40,6 @@
                 <th>Estimated Diameter</th>
                 <th>All Orbiting Bodies</th>
                 <th>Relative Velocity</th>
-                <!-- <th>Orbit Class Type</th> -->
                 <th>Orbit Description</th>
             </tr>
         </thead>
@@ -53,13 +58,12 @@
                     <br>
                     {{ asteroid['diameter_feet']['estimated_diameter_min'] | int }}ft - {{ asteroid['diameter_feet']['estimated_diameter_max'] | int }}ft
                 </td>
-                <td>{{ asteroid['orbiting_bodies'] }}</td>
+                <td>{{ ', '.join(asteroid['orbiting_bodies']) }}</td>
                 <td>
                     {{ asteroid['velocity_km'] | float | round(2) }} km/h
                     <br>
                     {{ asteroid['velocity_miles'] | float | round(2) }} miles/h
                 </td>
-                <!-- <td>{{ asteroid['orbit_class_type'] }}</td> -->
                 <td>{{ asteroid['orbit_type_description'] }}</td>
             </tr>
             {% endfor %}
