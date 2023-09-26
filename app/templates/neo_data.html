@@ -18,7 +18,7 @@
         Please specify the date range for which you would like to retrieve Near-Earth Object informations:
     </p>
 
-    <form method="post" action="/neo">
+    <form method="post" action="/neo" onsubmit="return validateDates()">
         <div class="date-inputs">
             <label for="start_date">Start Date:</label>
             <input type="date" id="start_date" name="start_date" value="{{ start_date }}" required>
@@ -108,6 +108,21 @@
     <p>In summary, this data represents a collection of information about various asteroids, including their observation
         history, physical characteristics, orbital details, and whether they pose a hazard to Earth.</p>
     <hr>
+
+    <!-- Prevent start date to be higher than the end date in the form -->
+    <script>
+        function validateDates() {
+            var startDate = new Date(document.getElementById("start_date").value);
+            var endDate = new Date(document.getElementById("end_date").value);
+
+            if (startDate > endDate) {
+                alert("Start Date cannot be after End Date.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </body>
 
 </html>
