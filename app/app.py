@@ -35,5 +35,4 @@ def neo_data():
         return "NEO Data Not Found!"
 
 if __name__ == "__main__":
-    app.config.from_pyfile('settings.py')
     app.run(host="0.0.0.0", port=port, debug=True)
