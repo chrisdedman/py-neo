@@ -12,4 +12,4 @@ timeout = 30
 loglevel = "info" 
 errorlog = "-"  # "-" means stderr
 accesslog = "-"  # "-" means stderr
-chdir = "."  # Set to the current directory
+chdir = "./app"  # Set to the current directory
