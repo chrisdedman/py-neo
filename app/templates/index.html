@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Near Earth Asteroids</title>
+  <link rel="stylesheet" type="text/css" href="../static/style.css">
+</head>
+
+<body>
+  <h1>Near Earth Object Data</h1>
+  <hr>
+  <p class="center">
+    Welcome to the Near Earth Object (NEO) tracking app. Here is today's summary data about Near Earth Celestial Objects.
+  </p>
+  <hr>
+
+  <p class="center">Number of Asteroids Detected Today: {{ num_of_object }}</p>
+
+  <ul class="neo-list">
+    {% for asteroid in neo_info.values() %}
+    <li>
+      <strong>Object ID:</strong> {{ asteroid['id'] }}<br>
+      <strong>Name:</strong> {{ asteroid['name'] }}<br>
+      <strong>First Observed:</strong> {{ asteroid['first_observation'] }}<br>
+      <strong>Last Observed:</strong> {{ asteroid['last_observation'] }}<br>
+      <strong>Hazardous Object?:</strong> {{ asteroid['hazardous'] }}<br>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <p class="center">
+    <a href="/neo">View More NEO Data</a>
+  </p>
+
+  <hr>
+
+  <h2>Data Explained</h2>
+  <p>This table represents data related to various celestial objects, specifically asteroids, that have been observed
+    and tracked over a period of time. The table includes a subset of the following information:</p>
+  <ul>
+    <li><strong>Object ID:</strong> Unique identifier for each celestial object in the dataset.</li>
+    <li><strong>Name:</strong> Provides the name or designation of the celestial object, often including the year of its
+      discovery.</li>
+    <li><strong>First Observed:</strong> Represents the first known date when the celestial object was observed or
+      discovered.</li>
+    <li><strong>Last Observed:</strong> Represents the most recent observation or tracking of the celestial object.</li>
+    <li><strong>Hazardous Object?:</strong> Indicates whether the celestial object is considered hazardous.</li>
+  </ul>
+  <p>In summary, this data represents a subset of information about various asteroids detected near Earth.</p>
+  <hr>
+</body>
+
+</html>
