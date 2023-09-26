@@ -7,7 +7,7 @@
 <body>
     <h1>Near Earth Object Data</h1>
     <hr>
-    <p>
+    <p class="center">
         Please specify the date range for which you would like to retrieve Near-Earth Object informations:
     </p>
 
@@ -25,7 +25,7 @@
 
     <hr>
     
-    <p>Number of Asteroids Detected: {{ num_of_object }}</p>
+    <p class="center">Number of Asteroids Detected: {{ num_of_object }}</p>
     
     <table border="1">
         <thead>
@@ -69,5 +69,24 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <hr>
+
+    <h2>Data Explained</h2>
+    <p>This table represents data related to various celestial objects, specifically asteroids, that have been observed and tracked over a period of time. The table includes the following information:</p>
+    <ul>
+        <li><strong>Object ID:</strong> Unique identifier for each celestial object in the dataset.</li>
+        <li><strong>Name:</strong> Provides the name or designation of the celestial object, often including the year of its discovery.</li>
+        <li><strong>First Observed:</strong> Represents the first known date when the celestial object was observed or discovered.</li>
+        <li><strong>Last Observed:</strong> Represents the most recent observation or tracking of the celestial object.</li>
+        <li><strong>Hazardous Object?:</strong> Indicates whether the celestial object is considered hazardous.</li>
+        <li><strong>Close Approach:</strong> Specifies the next predicted close approach date and time of the celestial object to Earth.</li>
+        <li><strong>Current Orbit:</strong> Mentions the celestial body or bodies that the object is currently orbiting.</li>
+        <li><strong>Estimated Diameter:</strong> Provides an estimated range of the diameter of the celestial object, expressed in both meters and feet.</li>
+        <li><strong>Orbiting Bodies:</strong> Lists the celestial bodies that the object is known to be orbiting.</li>
+        <li><strong>Relative Velocity:</strong> Indicates the relative velocity of the celestial object with respect to Earth, given in both kilometers per hour and miles per hour.</li>
+        <li><strong>Orbit Description:</strong> Provides a brief description of the object's orbit, including information about its similarity to the orbit of specific asteroids like 1862 Apollo or 2062 Aten.</li>
+    </ul>
+    <p>In summary, this data represents a collection of information about various asteroids, including their observation history, physical characteristics, orbital details, and whether they pose a hazard to Earth.</p>
 </body>
 </html>
