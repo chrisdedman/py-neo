@@ -37,7 +37,7 @@ These steps will ensure that the project can access NASA's API for retrieving NE
 
 ## Technologies
 The project is created with:
-* Python version: 3.9
+* Python version: 3.10
 
 ## Author
    * [Christopher Dedman-Rollet](https://twitter.com/DedmanRollet)
