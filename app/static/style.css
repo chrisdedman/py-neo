@@ -17,10 +17,18 @@ h1 {
   font-size: 30px;
 }
 
+h2 {
+  margin-left: 10px;
+}
+
 /* Paragraph Styles */
 p {
-  text-align: center;
+  margin-left: 20px;
   font-size: 18px;
+}
+
+p.center {
+  text-align: center;
 }
 
 /* Form Styles */
