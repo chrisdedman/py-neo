@@ -20,9 +20,20 @@ Key features of the app include:
 
 These features enable users to access, understand, and analyze essential information about Near-Earth Objects (NEOs) conveniently within the app.
 
-
 ## Setup
-Request your free key API from NASA directly from their [website](https://api.nasa.gov/), then add your key to the main() function.
+1. Clone the project to your local machine.
+
+2. Create a `.env` file in the project's root directory if it doesn't already exist.
+
+3. Obtain your free [NASA API key](https://api.nasa.gov/) by visiting their website.
+
+4. Add your NASA API key to the `.env` file as follows:
+```
+NASA_API_KEY=your_api_key_here
+```
+Replace `your_api_key_here` with the actual API key you obtained from NASA.
+
+These steps will ensure that the project can access NASA's API for retrieving NEO data.
 
 ## Technologies
 The project is created with:
