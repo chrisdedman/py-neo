@@ -1,4 +1,25 @@
- /* Default styles */
+/* Styling for the NEO list */
+.neo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.neo-list li {
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f7f7f7;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  display: inline-block;
+}
+
+.neo-list li strong {
+  font-weight: bold;
+}
+
+/* Default styles */
  body, h1, p {
   margin: 0;
   padding: 0;
