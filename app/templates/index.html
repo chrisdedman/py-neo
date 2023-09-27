@@ -10,7 +10,8 @@
   <h1>Near Earth Object Data</h1>
   <hr>
   <p class="center">
-    Welcome to the Near Earth Object (NEO) tracking app. Here is today's summary data about Near Earth Celestial Objects.
+    Welcome to the Near Earth Object (NEO) tracking app. Here is today's summary data about Near Earth Celestial
+    Objects.
   </p>
   <hr>
 
@@ -19,16 +20,17 @@
   <ul class="neo-list">
     {% for asteroid in neo_info.values() %}
     <li>
-      <strong>Object ID:</strong> {{ asteroid['id'] }}<br>
       <strong>Name:</strong> {{ asteroid['name'] }}<br>
       <strong>First Observed:</strong> {{ asteroid['first_observation'] }}<br>
       <strong>Last Observed:</strong> {{ asteroid['last_observation'] }}<br>
+      <strong>Velocity:</strong> {{ asteroid['velocity_km'] | int }} km/h |
+                                  {{ asteroid['velocity_miles'] | int }} miles/h<br>
       <strong>Hazardous Object?:</strong> {{ asteroid['hazardous'] }}<br>
     </li>
     {% endfor %}
   </ul>
   <div class="top-nav">
-    <a href="/neo">View More NEO Data</a>
+    <a href="/neo-data">View More NEO Data</a>
   </div>
 
   <hr>
@@ -37,12 +39,13 @@
   <p>This table represents data related to various celestial objects, specifically asteroids, that have been observed
     and tracked over a period of time. The table includes a subset of the following information:</p>
   <ul>
-    <li><strong>Object ID:</strong> Unique identifier for each celestial object in the dataset.</li>
     <li><strong>Name:</strong> Provides the name or designation of the celestial object, often including the year of its
       discovery.</li>
     <li><strong>First Observed:</strong> Represents the first known date when the celestial object was observed or
       discovered.</li>
     <li><strong>Last Observed:</strong> Represents the most recent observation or tracking of the celestial object.</li>
+    <li><strong>Velocity:</strong> Indicates the relative velocity of the celestial object with respect to
+      Earth, given in both kilometers per hour and miles per hour.</li>
     <li><strong>Hazardous Object?:</strong> Indicates whether the celestial object is considered hazardous.</li>
   </ul>
   <p>In summary, this data represents a subset of information about various asteroids detected near Earth.</p>
