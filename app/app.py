@@ -37,7 +37,7 @@ def index():
     return fetch_data(start_date, end_date, "index.html")
 
 
-@app.route("/neo", methods=["GET", "POST"])
+@app.route("/neo-data", methods=["GET", "POST"])
 def neo_data():
     """Get Near Earth Object Data."""
     if request.method == "POST":
