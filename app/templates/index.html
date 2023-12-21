@@ -6,7 +6,7 @@
   <link rel="stylesheet" type="text/css" href="../static/style.css">
 </head>
 
-<body>
+<body class="center">
   <h1>Near Earth Object Data</h1>
   <hr>
   <p class="center">
@@ -17,18 +17,24 @@
 
   <p class="center">Number of Asteroids Detected Today: {{ num_of_object }}</p>
 
-  <ul class="neo-list">
-    {% for asteroid in neo_info.values() %}
-    <li>
-      <strong>Name:</strong> {{ asteroid['name'] }}<br>
-      <strong>First Observed:</strong> {{ asteroid['first_observation'] }}<br>
-      <strong>Last Observed:</strong> {{ asteroid['last_observation'] }}<br>
-      <strong>Velocity:</strong> {{ asteroid['velocity_km'] | int }} km/h |
-                                  {{ asteroid['velocity_miles'] | int }} miles/h<br>
-      <strong>Hazardous Object?:</strong> {{ asteroid['hazardous'] }}<br>
-    </li>
-    {% endfor %}
-  </ul>
+  <div class="lg-w-1-3">
+    <div class="lg-flex lg-flex-col">
+      <ul class="neo-list">
+        {% for asteroid in neo_info.values() %}
+        <li class="neo-card">
+          <strong>Name:</strong> {{ asteroid['name'] }}<br>
+          <strong>First Observed:</strong> {{ asteroid['first_observation'] }}<br>
+          <strong>Last Observed:</strong> {{ asteroid['last_observation'] }}<br>
+          <strong>Velocity:</strong> {{ asteroid['velocity_km'] | int }} km/h |
+          {{ asteroid['velocity_miles'] | int }} miles/h<br>
+          <strong>Hazardous Object?:</strong> {{ asteroid['hazardous'] }}<br>
+        </li>
+        {% endfor %}
+      </ul>
+
+    </div>
+  </div>
+
   <div class="top-nav">
     <a href="/neo-data">View More NEO Data</a>
   </div>
