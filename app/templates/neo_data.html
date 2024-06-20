@@ -1,128 +1,181 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Near Earth Asteroids</title>
-    <link rel="stylesheet" type="text/css" href="../static/style.css">
+	<title>Near Earth Asteroids</title>
+	<link rel="stylesheet" type="text/css" href="../static/style.css">
+	<!-- DataTables CSS -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+	<style>
+		/* Custom styles for DataTables elements */
+		.dataTables_wrapper .dataTables_filter {
+			text-align: left;
+			margin-bottom: 10px;
+		}
+
+		.dataTables_wrapper .dataTables_filter input {
+			margin-left: 0.5em;
+			padding: 5px;
+			width: 200px;
+		}
+
+		.dataTables_wrapper .dataTables_length {
+			text-align: left;
+			margin-bottom: 10px;
+			margin: 0 auto;
+		}
+
+		/* Align DataTables elements with table margins */
+		.dataTables_wrapper {
+			width: 95%;
+			margin: 0 auto;
+		}
+	</style>
 </head>
 
 <body>
-    <div class="top-nav">
-        <a href="/">HOME</a>
-    </div>
-    
-    <hr>
-    <h1>Near Earth Object Data</h1>
-    <hr>
+	<div class="top-nav">
+		<a href="/">HOME</a>
+	</div>
 
-    <p class="center">
-        Please specify the date range for which you would like to retrieve Near-Earth Object informations:
-    </p>
+	<hr>
+	<h1>Near Earth Object Data</h1>
+	<hr>
 
-    <form method="post" action="/neo-data" onsubmit="return validateDates()">
-        <div class="date-inputs">
-            <label for="start_date">Start Date:</label>
-            <input type="date" id="start_date" name="start_date" value="{{ start_date }}" required>
+	<p class="center">
+		Please specify the date range for which you would like to retrieve Near-Earth Object information:
+	</p>
 
-            <label for="end_date">End Date:</label>
-            <input type="date" id="end_date" name="end_date" value="{{ end_date }}" required>
-        </div>
+	<form method="post" action="/neo-data" onsubmit="return validateDates()">
+		<div class="date-inputs">
+			<label for="start_date">Start Date:</label>
+			<input type="date" id="start_date" name="start_date" value="{{ start_date }}" required>
 
-        <input type="submit" value="Submit">
-    </form>
+			<label for="end_date">End Date:</label>
+			<input type="date" id="end_date" name="end_date" value="{{ end_date }}" required>
+		</div>
 
-    <hr>
+		<input type="submit" value="Submit">
+	</form>
 
-    <p class="center">Number of Asteroids Detected: {{ num_of_object }}</p>
+	<hr>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Object ID</th>
-                <th>Name</th>
-                <th>First Observed</th>
-                <th>Last Observed</th>
-                <th>Hazardous Object?</th>
-                <th>Close Approach</th>
-                <th>Current Orbit</th>
-                <th>Estimated Diameter</th>
-                <th>Orbiting Bodies</th>
-                <th>Relative Velocity</th>
-                <th>Orbit Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for asteroid in neo_info.values() %}
-            <tr>
-                <td>{{ asteroid['id'] }}</td>
-                <td>{{ asteroid['name'] }}</td>
-                <td>{{ asteroid['first_observation'] }}</td>
-                <td>{{ asteroid['last_observation'] }}</td>
-                <td>{{ asteroid['hazardous'] }}</td>
-                <td>{{ asteroid['close_approach_date'] }}</td>
-                <td>{{ asteroid['current_orbiting_body'] }}</td>
-                <td>
-                    {{ asteroid['diameter_meter']['estimated_diameter_min'] | int }}m - {{
-                    asteroid['diameter_meter']['estimated_diameter_max'] | int }}m
-                    <br>
-                    {{ asteroid['diameter_feet']['estimated_diameter_min'] | int }}ft - {{
-                    asteroid['diameter_feet']['estimated_diameter_max'] | int }}ft
-                </td>
-                <td>{{ ', '.join(asteroid['orbiting_bodies']) }}</td>
-                <td>
-                    {{ asteroid['velocity_km'] | float | round(2) }} km/h
-                    <br>
-                    {{ asteroid['velocity_miles'] | float | round(2) }} miles/h
-                </td>
-                <td>{{ asteroid['orbit_type_description'] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+	<p class="center">Number of Asteroids Detected: {{ num_of_object }}</p>
 
-    <hr>
+	<table id="neoTable" class="display" border="1">
+		<thead>
+			<tr>
+				<th>Object ID</th>
+				<th>Name</th>
+				<th>First Observed</th>
+				<th>Last Observed</th>
+				<th>Hazardous Object?</th>
+				<th>Close Approach</th>
+				<th>Current Orbit</th>
+				<th>Estimated Diameter</th>
+				<th>Orbiting Bodies</th>
+				<th>Relative Velocity</th>
+				<th>Orbit Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for asteroid in neo_info.values() %}
+			<tr>
+				<td>{{ asteroid['id'] }}</td>
+				<td>{{ asteroid['name'] }}</td>
+				<td>{{ asteroid['first_observation'] }}</td>
+				<td>{{ asteroid['last_observation'] }}</td>
+				<td>{{ asteroid['hazardous'] }}</td>
+				<td>{{ asteroid['close_approach_date'] }}</td>
+				<td>{{ asteroid['current_orbiting_body'] }}</td>
+				<td>
+					{{ asteroid['diameter_meter']['estimated_diameter_min'] | int }}m - {{
+					asteroid['diameter_meter']['estimated_diameter_max'] | int }}m
+					<br>
+					{{ asteroid['diameter_feet']['estimated_diameter_min'] | int }}ft - {{
+					asteroid['diameter_feet']['estimated_diameter_max'] | int }}ft
+				</td>
+				<td>{{ ', '.join(asteroid['orbiting_bodies']) }}</td>
+				<td>
+					{{ asteroid['velocity_km'] | float | round(2) }} km/h
+					<br>
+					{{ asteroid['velocity_miles'] | float | round(2) }} miles/h
+				</td>
+				<td>{{ asteroid['orbit_type_description'] }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 
-    <h2>Data Explained</h2>
-    <p>This table represents data related to various celestial objects, specifically asteroids, that have been observed
-        and tracked over a period of time. The table includes the following information:</p>
-    <ul>
-        <li><strong>Object ID:</strong> Unique identifier for each celestial object in the dataset.</li>
-        <li><strong>Name:</strong> Provides the name or designation of the celestial object, often including the year of
-            its discovery.</li>
-        <li><strong>First Observed:</strong> Represents the first known date when the celestial object was observed or
-            discovered.</li>
-        <li><strong>Last Observed:</strong> Represents the most recent observation or tracking of the celestial object.
-        </li>
-        <li><strong>Hazardous Object?:</strong> Indicates whether the celestial object is considered hazardous.</li>
-        <li><strong>Close Approach:</strong> Specifies the next predicted close approach date and time of the celestial
-            object to Earth.</li>
-        <li><strong>Current Orbit:</strong> Mentions the celestial body or bodies that the object is currently orbiting.
-        </li>
-        <li><strong>Estimated Diameter:</strong> Provides an estimated range of the diameter of the celestial object,
-            expressed in both meters and feet.</li>
-        <li><strong>Orbiting Bodies:</strong> Lists the celestial bodies that the object is known to be orbiting.</li>
-        <li><strong>Relative Velocity:</strong> Indicates the relative velocity of the celestial object with respect to
-            Earth, given in both kilometers per hour and miles per hour.</li>
-        <li><strong>Orbit Description:</strong> Provides a brief description of the object's orbit, including
-            information about its similarity to the orbit of specific asteroids like 1862 Apollo or 2062 Aten.</li>
-    </ul>
-    <p>In summary, this data represents a collection of information about various asteroids, including their observation
-        history, physical characteristics, orbital details, and whether they pose a hazard to Earth.</p>
-    <hr>
+	<hr>
 
-    <!-- Prevent start date to be higher than the end date in the form -->
-    <script>
-        function validateDates() {
-            var startDate = new Date(document.getElementById("start_date").value);
-            var endDate = new Date(document.getElementById("end_date").value);
+	<h2>Data Explained</h2>
+	<p>This table represents data related to various celestial objects, specifically asteroids, that have been observed
+		and tracked over a period of time. The table includes the following information:</p>
+	<ul>
+		<li><strong>Object ID:</strong> Unique identifier for each celestial object in the dataset.</li>
+		<li><strong>Name:</strong> Provides the name or designation of the celestial object, often including the year of
+			its discovery.</li>
+		<li><strong>First Observed:</strong> Represents the first known date when the celestial object was observed or
+			discovered.</li>
+		<li><strong>Last Observed:</strong> Represents the most recent observation or tracking of the celestial object.
+		</li>
+		<li><strong>Hazardous Object?:</strong> Indicates whether the celestial object is considered hazardous.</li>
+		<li><strong>Close Approach:</strong> Specifies the next predicted close approach date and time of the celestial
+			object to Earth.</li>
+		<li><strong>Current Orbit:</strong> Mentions the celestial body or bodies that the object is currently orbiting.
+		</li>
+		<li><strong>Estimated Diameter:</strong> Provides an estimated range of the diameter of the celestial object,
+			expressed in both meters and feet.</li>
+		<li><strong>Orbiting Bodies:</strong> Lists the celestial bodies that the object is known to be orbiting.</li>
+		<li><strong>Relative Velocity:</strong> Indicates the relative velocity of the celestial object with respect to
+			Earth, given in both kilometers per hour and miles per hour.</li>
+		<li><strong>Orbit Description:</strong> Provides a brief description of the object's orbit, including
+			information about its similarity to the orbit of specific asteroids like 1862 Apollo or 2062 Aten.</li>
+	</ul>
+	<p>In summary, this data represents a collection of information about various asteroids, including their observation
+		history, physical characteristics, orbital details, and whether they pose a hazard to Earth.</p>
+	<hr>
 
-            if (startDate > endDate) {
-                alert("Start Date cannot be after End Date.");
-                return false;
-            }
+	<!-- jQuery -->
+	<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<!-- DataTables JS -->
+	<script type="text/javascript" charset="utf8"
+		src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('#neoTable').DataTable(
+				{
+					"lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+					"lengthChange": true,
+					"language": {
+						"sSearch": "🔍",
+						"searchPlaceholder": "Search",
+						"lengthMenu": "Display _MENU_ records per page",
+						"zeroRecords": "No matching records found",
+						"info": "Showing _START_ to _END_ of _TOTAL_ records",
+						"infoEmpty": "No records available",
+						"infoFiltered": "(filtered from _MAX_ total records)"
+					},
+					"info": true,
+					"order": [0, 'asc'],
+					"ordering": true,
+				}
+			);
+		});
 
-            return true;
-        }
-    </script>
+		function validateDates() {
+			var startDate = new Date(document.getElementById("start_date").value);
+			var endDate = new Date(document.getElementById("end_date").value);
+
+			if (startDate > endDate) {
+				alert("Start Date cannot be after End Date.");
+				return false;
+			}
+
+			return true;
+		}
+	</script>
 </body>
 
 </html>
