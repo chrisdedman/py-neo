@@ -2,39 +2,30 @@
 <html>
 
 <head>
+	<!-- Metas -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="author" content="Astra Dedman">
+  <meta name="title" content="Near Earth Asteroids">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="../static/style.css">
+  <link rel="icon" type="image/png" href="images/code_society_round.png">
+
+  <!-- jQuery and DataTables -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+
 	<title>Near Earth Asteroids</title>
-	<link rel="stylesheet" type="text/css" href="../static/style.css">
-	<!-- DataTables CSS -->
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-	<link rel="stylesheet" type="text/css"
-		href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
-	<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
-	<style>
-		/* Custom styles for DataTables elements */
-		.dataTables_wrapper .dataTables_filter {
-			text-align: left;
-			margin-bottom: 10px;
-		}
-
-		.dataTables_wrapper .dataTables_filter input {
-			margin-left: 0.5em;
-			padding: 5px;
-			width: 200px;
-		}
-
-		.dataTables_wrapper .dataTables_length {
-			text-align: left;
-			margin-bottom: 10px;
-			margin: 0 auto;
-		}
-
-		/* Align DataTables elements with table margins */
-		.dataTables_wrapper {
-			width: 95%;
-			margin: 0 auto;
-		}
-	</style>
 </head>
 
 <body>
@@ -66,7 +57,7 @@
 
 	<p class="center">Number of Asteroids Detected: {{ num_of_object }}</p>
 
-	<table id="neoTable" class="display" border="1">
+	<table id="neoTable" class="display responsive nowrap" border="1">
 		<thead>
 			<tr>
 				<th>Object ID</th>
@@ -85,27 +76,27 @@
 		<tbody>
 			{% for asteroid in neo_info.values() %}
 			<tr>
-				<td>{{ asteroid['id'] }}</td>
-				<td>{{ asteroid['name'] }}</td>
-				<td>{{ asteroid['first_observation'] }}</td>
-				<td>{{ asteroid['last_observation'] }}</td>
-				<td>{{ asteroid['hazardous'] }}</td>
-				<td>{{ asteroid['close_approach_date'] }}</td>
-				<td>{{ asteroid['current_orbiting_body'] }}</td>
-				<td>
+				<td data-label="Object ID">{{ asteroid['id'] }}</td>
+				<td data-label="Name">{{ asteroid['name'] }}</td>
+				<td data-label="First Observed">{{ asteroid['first_observation'] }}</td>
+				<td data-label="Last Observed">{{ asteroid['last_observation'] }}</td>
+				<td data-label="Hazardous Object?">{{ asteroid['hazardous'] }}</td>
+				<td data-label="Close Approach">{{ asteroid['close_approach_date'] }}</td>
+				<td data-label="Current Orbit">{{ asteroid['current_orbiting_body'] }}</td>
+				<td data-label="Estimated Diameter">
 					{{ asteroid['diameter_meter']['estimated_diameter_min'] | int }}m - {{
 					asteroid['diameter_meter']['estimated_diameter_max'] | int }}m
 					<br>
 					{{ asteroid['diameter_feet']['estimated_diameter_min'] | int }}ft - {{
 					asteroid['diameter_feet']['estimated_diameter_max'] | int }}ft
 				</td>
-				<td>{{ ', '.join(asteroid['orbiting_bodies']) }}</td>
-				<td>
+				<td data-label="Orbiting Bodies">{{ ', '.join(asteroid['orbiting_bodies']) }}</td>
+				<td data-label="Relative Velocity">
 					{{ asteroid['velocity_km'] | float | round(2) }} km/h
 					<br>
 					{{ asteroid['velocity_miles'] | float | round(2) }} miles/h
 				</td>
-				<td>{{ asteroid['orbit_type_description'] }}</td>
+				<td data-label="Orbit Description">{{ asteroid['orbit_type_description'] }}</td>
 			</tr>
 			{% endfor %}
 		</tbody>
@@ -141,11 +132,6 @@
 		history, physical characteristics, orbital details, and whether they pose a hazard to Earth.</p>
 	<hr>
 
-	<!-- jQuery -->
-	<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-	<!-- DataTables JS -->
-	<script type="text/javascript" charset="utf8"
-		src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 	<script>
 		$(document).ready(function () {
 			$('#neoTable').DataTable({
@@ -161,22 +147,17 @@
 					"infoFiltered": "(filtered from _MAX_ total records)",
 				},
 				"info": true,
-				"order": [2, 'asc'],
+				"order": [3, 'desc'],
 				"ordering": true,
 				"autoWidth": false,
 				"responsive": true,
+				"paging": true,
 				"columnDefs": [
 					{
-						"targets": '_all',
-						"visible": true,
-						"responsivePriority": 0
-					},
-					{
-						"targets": [0, 2, 3, 4, 5, 6, 7, 8, 9],
-						"visible": false,
+						"targets": [0, 3],
 						"responsivePriority": 1
 					}
-				]
+				],
 			});
 		});
 
