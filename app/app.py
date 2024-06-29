@@ -1,12 +1,9 @@
-"""Start the Flask app and get Near Earth Object Data."""
 from flask import Flask, request, render_template
 from datetime import datetime, timedelta, date
-from api import get_api_data, get_neo_info
-from config import BASE_URL, API_KEY, port
-
+from app.api import get_api_data, get_neo_info
+from app.config import BASE_URL, API_KEY, port
 
 app = Flask(__name__)
-
 
 def fetch_data(start_date, end_date, context):
     """Fetch data from NASA API based on a given dates."""
@@ -23,10 +20,8 @@ def fetch_data(start_date, end_date, context):
         neo_info = get_neo_info(near_earth_object, dates)
 
         return render_template(context, neo_info=neo_info, num_of_object=num_of_object, start_date=start_date, end_date=end_date)
-
     else:
         return "NEO Data Not Found!"
-
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -35,7 +30,6 @@ def index():
     end_date   = date.today().strftime("%Y-%m-%d")
 
     return fetch_data(start_date, end_date, "index.html")
-
 
 @app.route("/neo-data", methods=["GET", "POST"])
 def neo_data():
@@ -50,7 +44,6 @@ def neo_data():
                       ).strftime("%Y-%m-%d")
 
     return fetch_data(start_date, end_date, "neo_data.html")
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=port, debug=True)
