@@ -200,6 +200,7 @@ th {
   table.dataTable tbody td {
     display: block;
     text-align: center;
+    text-wrap: wrap;
   }
 
   table.dataTable tbody tr {
@@ -211,6 +212,7 @@ th {
     border: 0;
     padding: 10px 5px;
     position: relative;
+    text-wrap: wrap;
   }
 
   table.dataTable tbody td:before {
@@ -224,17 +226,24 @@ th {
     font-weight: bold;
 
     overflow-x: auto;
+    text-wrap: wrap;
+  }
+
+  .dataTables_wrapper .dataTables_filter {
+    overflow-x: auto;
+    text-wrap: wrap;
   }
 }
 
 #neoTable {
-  padding: 20px;
+  padding: 10px;
   border-radius: 8px;
   width: 95%;
   margin: 0 auto;
   margin-bottom: 20px;
 
   overflow-x: auto;
+  text-wrap: wrap;
 }
 
 /* Custom styles for DataTables elements */
