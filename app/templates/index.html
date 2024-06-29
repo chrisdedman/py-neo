@@ -6,6 +6,8 @@
 	<link rel="stylesheet" type="text/css" href="../static/style.css">
 	<!-- DataTables CSS -->
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+	<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
 	<style>
 		/* Custom styles for DataTables elements */
 		.dataTables_wrapper .dataTables_filter {
@@ -106,18 +108,33 @@
 				{
 					"lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
 					"lengthChange": true,
+					"pageLength": 25,
 					"language": {
-						"sSearch": "🔍",
-						"searchPlaceholder": "Search",
-						"lengthMenu": "Display _MENU_ records per page",
+						"sSearch": "",
+						"searchPlaceholder": "🔍 Search",
 						"zeroRecords": "No matching records found",
 						"info": "Showing _START_ to _END_ of _TOTAL_ records",
 						"infoEmpty": "No records available",
-						"infoFiltered": "(filtered from _MAX_ total records)"
+						"infoFiltered": "(filtered from _MAX_ total records)",
 					},
 					"info": true,
-					"order": [0, 'asc'],
+					"order": [2, 'asc'],
 					"ordering": true,
+					"autoWidth": false,
+					"responsive": true,
+					"paging": true,
+					"columnDefs": [
+						{
+							"targets": '_all',
+							"visible": true,
+							"responsivePriority": 1
+						},
+						{
+							"targets": [0, 2, 3, 4, 5, 6, 7, 8, 9],
+							"visible": false,
+							"responsivePriority": 2
+						}
+					],
 				}
 			);
 		});
