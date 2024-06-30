@@ -38,10 +38,11 @@
 	<hr>
 
 	<p class="center">
-		Please specify the date range for which you would like to retrieve Near-Earth Object information:
+		<!-- Please specify the date range for which you would like to retrieve Near-Earth Object information: -->
+		 Asteroid informations from {{ start_date }} to {{ end_date }}
 	</p>
 
-	<form method="post" action="/neo-data" onsubmit="return validateDates()">
+	<!-- <form method="post" action="/neo-data" onsubmit="return validateDates()">
 		<div class="date-inputs">
 			<label for="start_date">Start Date:</label>
 			<input type="date" id="start_date" name="start_date" value="{{ start_date }}" required>
@@ -51,7 +52,7 @@
 		</div>
 
 		<input type="submit" value="Submit">
-	</form>
+	</form> -->
 
 	<hr>
 
@@ -60,8 +61,8 @@
 	<table id="neoTable" class="display responsive wrap" border="1">
 		<thead>
 			<tr>
-				<th>Object ID</th>
 				<th>Name</th>
+				<th>Object ID</th>
 				<th>First Observed</th>
 				<th>Last Observed</th>
 				<th>Hazardous Object?</th>
@@ -76,8 +77,8 @@
 		<tbody>
 			{% for asteroid in neo_info.values() %}
 			<tr>
-				<td data-label="Object ID">{{ asteroid['id'] }}</td>
 				<td data-label="Name">{{ asteroid['name'] }}</td>
+				<td data-label="Object ID">{{ asteroid['id'] }}</td>
 				<td data-label="First Observed">{{ asteroid['first_observation'] }}</td>
 				<td data-label="Last Observed">{{ asteroid['last_observation'] }}</td>
 				<td data-label="Hazardous Object?">{{ asteroid['hazardous'] }}</td>
@@ -137,7 +138,7 @@
 			$('#neoTable').DataTable({
 				"lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
 				"lengthChange": true,
-				"pageLength": 25,
+				"pageLength": 10,
 				"language": {
 					"sSearch": "",
 					"searchPlaceholder": "🔍 Search",
