@@ -43,7 +43,7 @@ def neo_data():
     #     start_date = (datetime.today() - timedelta(days=timelapse)
     #                   ).strftime("%Y-%m-%d")
     start_date = date.today().strftime("%Y-%m-%d")
-    end_date   = (datetime.today() + timedelta(days=1)).strftime("%Y-%m-%d")
+    end_date   = date.today().strftime("%Y-%m-%d")
 
     return fetch_data(start_date, end_date, "neo_data.html")
 
