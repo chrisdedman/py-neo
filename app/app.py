@@ -34,14 +34,16 @@ def index():
 @app.route("/neo-data", methods=["GET", "POST"])
 def neo_data():
     """Get Near Earth Object Data."""
-    if request.method == "POST":
-        start_date = request.form.get("start_date")
-        end_date   = request.form.get("end_date")
-    else:
-        end_date   = (datetime.today()).strftime("%Y-%m-%d")
-        timelapse  = request.args.get("timelapse", default=0, type=int)
-        start_date = (datetime.today() - timedelta(days=timelapse)
-                      ).strftime("%Y-%m-%d")
+    # if request.method == "POST":
+    #     start_date = request.form.get("start_date")
+    #     end_date   = request.form.get("end_date")
+    # else:
+    #     end_date   = (datetime.today()).strftime("%Y-%m-%d")
+    #     timelapse  = request.args.get("timelapse", default=0, type=int)
+    #     start_date = (datetime.today() - timedelta(days=timelapse)
+    #                   ).strftime("%Y-%m-%d")
+    start_date = date.today().strftime("%Y-%m-%d")
+    end_date   = (datetime.today() + timedelta(days=1)).strftime("%Y-%m-%d")
 
     return fetch_data(start_date, end_date, "neo_data.html")
 
