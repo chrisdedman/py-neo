@@ -1,13 +1,12 @@
 # NASA NEO (Near Earth Object) Web App
 
 ## Overview
-
 Using the NASA NEO API, this web app allows users to retrieve and display information about Near Earth Objects (NEOs). NEOs are asteroids and comets with orbits that come close to Earth's orbit.
 
 Key features of the app include:
 
-- Fetching NEO data for a specified date range.
-- Visualizing NEO data in an easy-to-read format.
+- Fetching daily NEO data.
+- Visualizing NEO data in an easy-to-read table.
 - Displaying information about NEOs, including::
   - Retrieving Object IDs and Names
   - Determining Hazardous Status
@@ -19,6 +18,8 @@ Key features of the app include:
   - Displaying First and Last Observation Dates
 
 These features enable users to access, understand, and analyze essential information about Near-Earth Objects (NEOs) conveniently within the app.
+
+The project is deployed on Vercel: https://asteroid-tracking.vercel.app
 
 ## Setup
 1. Clone the project to your local machine.
@@ -33,7 +34,7 @@ NASA_API_KEY=your_api_key_here
 ```
 Replace `your_api_key_here` with the actual API key you obtained from NASA.
 
-These steps will ensure that the project can access NASA's API for retrieving NEO data.
+These steps will ensure that the project can access NASA's API to retrieve NEO data.
 
 ## Technologies
 The project is created with:
